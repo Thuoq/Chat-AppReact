@@ -1,0 +1,22 @@
+.header {
+    width: 34vw;
+    position: absolute;
+    top: 40%;  
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &__input {
+        width: 100%;
+        font-size: 4rem;
+        font-family: inherit;
+        background-color: inherit;
+        border: none;
+        border-bottom: 1px solid #fff;
+        outline: none;
+        color: #F1EEEE;
+    }
+    &__input::placeholder {
+    	font-size: 4rem;
+    	color: #F1EEEE;
+    }
+}

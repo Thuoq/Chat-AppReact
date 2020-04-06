@@ -1,0 +1,26 @@
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: inherit;
+    &::after{
+        margin:0;
+        padding: 0;
+        box-sizing: inherit;
+    }
+    &::before{
+        margin:0;
+        padding: 0;
+        box-sizing: inherit;
+    }
+}
+html{
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #464159;
+    opacity: 77%;
+    font-family: 'Indie Flower', cursive;
+}
+// header Page1
