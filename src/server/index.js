@@ -1,7 +1,7 @@
 // Create Server
 const app = require('http').createServer();
 
-// Create Socer
+// Create Socket
 const io = module.exports.io = require("socket.io")(app);
 
 const PORT = process.env.PORT || 2708;

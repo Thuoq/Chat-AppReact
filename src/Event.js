@@ -1,4 +1,4 @@
-module.exports = {
+const EVENT_TYPES  = {
 	COMMUNITY_CHAT:"COMMUNITY_CHAT",
 	USER__CONNECTED: "USER__CONNECTED",
 	MESSAGE_RECIEVED: "MESSAGE_RECIEVED",
@@ -8,3 +8,5 @@ module.exports = {
 	VERIFY_USER: "VERIFY_USER",
 	LOG_OUT: "LOG_OUT"
 }
+
+module.exports = EVENT_TYPES;  

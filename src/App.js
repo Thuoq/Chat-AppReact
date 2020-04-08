@@ -1,10 +1,10 @@
 import React from 'react';
-import  SignIn from "./components/signIn/sign-in.components";
+import  Layout from "./components/layout/layout.components";
 
-function App() {
+function App() { 
   return (
     <div>
-        <SignIn/>
+        <Layout/>  
     </div>
   );
 }

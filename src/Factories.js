@@ -43,7 +43,7 @@ const createMessage  = ({message = "",sender=""} = {}) => ({
 * 	users {Array.string}
 */
 
-const createChat = ({messages = [],name="Communtity",users []} = {}) =>({
+const createChat = ({messages = [],name="Communtity",users = []} = {}) =>({
 	 id: uuidv4(),
 	 name,
 	 messages,
@@ -59,4 +59,9 @@ const createChat = ({messages = [],name="Communtity",users []} = {}) =>({
 */
 const getTime = (date) => {
 	return `${date.getHours()} : ${"0"+date.getMinures().slice(-2)}`
+}
+module.exports = {
+	createChat,
+	createUser,
+	createMessage
 }
