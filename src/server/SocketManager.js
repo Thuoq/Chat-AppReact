@@ -20,6 +20,10 @@ module.exports = (socket) => {
 		console.log(userConnected);
 		//console.log(socket.user)
 	})
+	socket.on(EVENT_TYPES.TYPING,(data)=>{
+		console.log(data);
+		io.sockets.emit("serverSend",data + `lewlew`)
+	})
 }
 
 /*@param user: {id: , name:}*/
