@@ -7,24 +7,23 @@ module.exports = (socket) => {
 	console.log("socket Id " + socket.id);
 	// VERIFY USER
 	socket.on(EVENT_TYPES.VERIFY_USER, (nickname,setUser)=> {
-		if(checkUserConnected(userConnected,nickname)){
+		if(checkUserConnected(userConnected,nickname)){	
 			setUser({isUser:true,user:null}) 
 		}else{
 			setUser({isUser:false,user: createUser({name:nickname})})
-		}
-	})
-	// ADD USER
+		} 
+	})   
+	// ADD USER  
 	socket.on(EVENT_TYPES.USER__CONNECTED,(user)=>{
 		userConnected = addUser(userConnected,user);
-		socket.user = user,
-		console.log(userConnected);
-		//console.log(socket.user)
+		//console.log(userConnected);
+		io.sockets.emit(EVENT_TYPES.USER__CURRENTLY_ONLINE,userConnected)	
 	})
-	socket.on(EVENT_TYPES.TYPING,(data)=>{
-		console.log(data);
-		io.sockets.emit("serverSend",data + `lewlew`)
-	})
-}
+	socket.on(EVENT_TYPES.LOG_OUT, (userOut) => {
+		io.sockets.emit("logout-user",userOut.name);
+		delete userConnected[userOut.name];  	
+	})  
+}  
 
 /*@param user: {id: , name:}*/
 function addUser (userPrev,nextUser) {

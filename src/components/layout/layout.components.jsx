@@ -3,7 +3,7 @@ import {createStructuredSelector} from 'reselect';
 import {selectSocket} from '../../redux/socket/socket.selector';
 import {connect} from 'react-redux';
 import "./layout.styles.scss";
-import {USER__CONNECTED,LOG_OUT} from '../../Event';
+import {USER__CONNECTED} from '../../Event';
 import LoginForm from '../loginForm/loginForm.components';
 import MainPage from '../MainPage/mainpage.components';
 class Layout extends React.Component {
@@ -22,18 +22,16 @@ class Layout extends React.Component {
 	/*
 	* Sets the user property in state to null
 	*/
-	// logout = () => { 
-	// 	const {socket} = this.state;
-	// 	socket.emit(LOG_OUT)
-	// 	this.setState({user: null})
-	// }
+	logout = () => { 
+		this.setState({user: null})
+	}
 	render() {
 		const {user} = this.state;
 		const {socket} = this.props; 
 		return (  
 			<div className = "container">
 				{
-					user ?  <MainPage/>  :
+					user ?  <MainPage user={user} logout = {this.logout}/>  :
 					<LoginForm socket={socket} setUser ={this.setUser}/>
 				}
 			</div>

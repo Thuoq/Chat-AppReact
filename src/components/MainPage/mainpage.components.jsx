@@ -2,9 +2,9 @@ import React from 'react';
 import './mainpage.styles.scss';
 import SideBar from '../sidebar/sidebar.components';
 import BoxChat from '../box-chat/box-chat.components';
-const MainPage = () => (
+const MainPage = ({logout,user}) => (
 	<div className="main">
-		<SideBar/>  
+		<SideBar user={user} logout = {logout}/>  
 		<BoxChat/>
 	</div>
 )
