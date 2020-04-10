@@ -14,19 +14,20 @@ import {setUserConnect,logoutUser} from '../../redux/userConnect/userConnect.act
 import "./sidebar.styles.scss";  
 
 class SideBar extends React.Component {
+
 	componentDidMount() {
-		const {socket,setUserConnect} = this.props;
+		const {socket,setUserConnect,logoutUser} = this.props;
 		socket.on(EVENT_TYPES.USER__CURRENTLY_ONLINE,(currentUser)=> {
 			setUserConnect(currentUser)
+		})
+		socket.on("logout-user",(userName)=>{
+			logoutUser(userName);
 		})
 	}
 	handleLogout = () => {
 		const {logoutUser,socket,user,logout} = this.props;
-		//logout();
-		socket.emit(EVENT_TYPES.LOG_OUT,user) 
-		socket.on("logout-user",(userName)=>{
-			logoutUser(userName);
-		})
+		logout();
+		socket.emit(EVENT_TYPES.LOG_OUT,user,logoutUser) 
 	} 
 	render() {
 		const {userCurrent} = this.props;

@@ -20,7 +20,7 @@ module.exports = (socket) => {
 		io.sockets.emit(EVENT_TYPES.USER__CURRENTLY_ONLINE,userConnected)	
 	})
 	socket.on(EVENT_TYPES.LOG_OUT, (userOut) => {
-		io.sockets.emit("logout-user",userOut.name);
+		socket.broadcast.emit("logout-user",userOut.name);
 		delete userConnected[userOut.name];  	
 	})  
 }  
