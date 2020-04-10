@@ -13,7 +13,7 @@ module.exports = (socket) => {
 			setUser({isUser:false,user: createUser({name:nickname})})
 		} 
 	})   
-	// ADD USER  
+	// ADD USER   
 	socket.on(EVENT_TYPES.USER__CONNECTED,(user)=>{
 		userConnected = addUser(userConnected,user);
 		//console.log(userConnected);

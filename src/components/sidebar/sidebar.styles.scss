@@ -88,6 +88,9 @@
     			position: absolute;
     			left: 20%;  
 			}
+			& .hidden{
+				display: none;
+			}
 
 		}
 		.chat__group{

@@ -9,12 +9,11 @@ import {selectSocket} from '../../redux/socket/socket.selector';
 import {createStructuredSelector} from 'reselect';
 import {selectUserCurrent} from '../../redux/userConnect/userConnect.selector';
 import {setUserConnect,logoutUser} from '../../redux/userConnect/userConnect.action';
-
-
 import "./sidebar.styles.scss";  
-
 class SideBar extends React.Component {
-
+	state = {
+		searchField: ''
+	}
 	componentDidMount() {
 		const {socket,setUserConnect,logoutUser} = this.props;
 		socket.on(EVENT_TYPES.USER__CURRENTLY_ONLINE,(currentUser)=> {
@@ -28,9 +27,15 @@ class SideBar extends React.Component {
 		const {logoutUser,socket,user,logout} = this.props;
 		logout();
 		socket.emit(EVENT_TYPES.LOG_OUT,user,logoutUser) 
-	} 
+	}
+	handleSearchUserOnline = (e) => {
+		e.preventDefault();
+		this.setState({ searchField : e.target.value})
+	}  
 	render() {
 		const {userCurrent} = this.props;
+		const {searchField} = this.state;
+		const filterUserConnect = userCurrent.filter( el => el.includes(searchField))
 		return (
 			<div className="side-bar">
 			<div className="header__logo">
@@ -40,10 +45,11 @@ class SideBar extends React.Component {
 				<div className="chat__heading">
 					<h3 className="heading__secondary">Chats</h3>
 				</div>
-				<div className="chat__search ">
-						<IconSearch className="chat__search--icon" />
+				<div className="chat__search "> 
+						<IconSearch className={searchField.length ?  "hidden" : "chat__search--icon" } />
 					<input type="text" 
 					id="search__input" 
+					onChange= {this.handleSearchUserOnline}
 					className="input chat__input"
 					 placeholder="Search"/>
 				</div>
@@ -53,8 +59,9 @@ class SideBar extends React.Component {
 				</div>
 				<hr/> 
 				<div className="chat__active">
-					{
-						userCurrent.map((el,idx) => <UserChatBar key={idx} user={el}/> )
+					{ 
+
+						filterUserConnect.map((el,idx) => <UserChatBar key={idx} user={el}/> )
 					}
 				</div>
 				<hr/>
@@ -68,7 +75,7 @@ class SideBar extends React.Component {
 }
 const mapDispatchToProps = dispatch => ({
 	setUserConnect : (user) => dispatch(setUserConnect(user)),
-	logoutUser: user => dispatch(logoutUser(user))
+	logoutUser: user => dispatch(logoutUser(user)),
 })
 const mapStateToProps = createStructuredSelector({
 	socket : selectSocket,
