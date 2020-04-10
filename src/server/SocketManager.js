@@ -10,7 +10,7 @@ module.exports = (socket) => {
 		if(checkUserConnected(userConnected,nickname)){	
 			setUser({isUser:true,user:null}) 
 		}else{
-			setUser({isUser:false,user: createUser({name:nickname})})
+			setUser({isUser:false,user: createUser({name:nickname,id: socket.id})})
 		} 
 	})   
 	// ADD USER   
@@ -23,6 +23,10 @@ module.exports = (socket) => {
 		socket.broadcast.emit("logout-user",userOut.name);
 		delete userConnected[userOut.name];  	
 	})  
+	socket.on(EVENT_TYPES.CHOOSE_USER_TO_CHAT,(user) => {
+		console.log("User Clik" + user)
+		socket.emit("Choose-user-date",user)
+	})
 }  
 
 /*@param user: {id: , name:}*/

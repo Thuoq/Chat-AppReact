@@ -31,7 +31,11 @@ class SideBar extends React.Component {
 	handleSearchUserOnline = (e) => {
 		e.preventDefault();
 		this.setState({ searchField : e.target.value})
-	}  
+	}
+	handleChooseUserChat = (user)  => {
+		const {socket} = this.props;
+		socket.emit(EVENT_TYPES.CHOOSE_USER_TO_CHAT,user);
+	}
 	render() {
 		const {userCurrent} = this.props;
 		const {searchField} = this.state;
@@ -46,12 +50,13 @@ class SideBar extends React.Component {
 					<h3 className="heading__secondary">Chats</h3>
 				</div>
 				<div className="chat__search "> 
-						<IconSearch className={searchField.length ?  "hidden" : "chat__search--icon" } />
+					<IconSearch className={searchField.length ?  
+								"hidden" : "chat__search--icon" } />
 					<input type="text" 
 					id="search__input" 
 					onChange= {this.handleSearchUserOnline}
 					className="input chat__input"
-					 placeholder="Search"/>
+					placeholder="Search"/>
 				</div>
 				<div className="chat__group u-margin-bottom-small">
 					<button className="btn btn--group"><span>Create Your Community</span></button>
@@ -61,7 +66,8 @@ class SideBar extends React.Component {
 				<div className="chat__active">
 					{ 
 
-						filterUserConnect.map((el,idx) => <UserChatBar key={idx} user={el}/> )
+						filterUserConnect.map((el,idx) => <UserChatBar 
+									key={idx} user={el} handleChooseUserChat={this.handleChooseUserChat}/> )
 					}
 				</div>
 				<hr/>

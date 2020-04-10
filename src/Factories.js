@@ -1,4 +1,3 @@
-const uuidv4 = require('uuid/v4');
 /*
 * createUser
 * @prop id {string}
@@ -7,8 +6,8 @@ const uuidv4 = require('uuid/v4');
 * 		name {string}
 */
 
-const createUser = ({ name = ""} = {}) => ({
-	id: uuidv4(),
+const createUser = ({ name = "",id} = {}) => ({
+	id,
 	name,
 })
 

@@ -1,31 +1,30 @@
 import React from 'react';
 import {ReactComponent as IconSend} from '../../assets/003-send.svg';
 import "./box-chat.styles.scss";
-import {TYPING} from '../../Event';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {selectSocket} from '../../redux/socket/socket.selector';
+import UserBoxChat from '../user-boxChat/user-boxChat.components'
 class BoxChat extends React.Component {
 	constructor(props){ 
 		super(props);
 		this.state = {
-			messeger:""
+			messeger:"",
+			userChoose: "",
 		}
 	}
-	handleChange = (e) => {
-		e.preventDefault();
+	componentDidMount() {
 		const {socket} = this.props;
-		const typeUer =  e.target.value;
-		socket.emit(TYPING,typeUer);
+		socket.on("Choose-user-date",(userChoose)=> {
+			this.setState({userChoose:userChoose})
+		})
 	}
+
 	render() {
-		const {socket} = this.props;
-		socket.on("serverSend",data => console.log(data))
-		return (
+		const {userChoose} = this.state;
+		return (  
 			<div className="body"> 
-			<div className="body__user">  
-				
-			</div>
+			<UserBoxChat userChoose={userChoose}  />
 			<div className="body__messeger">
 				<div className="body__messeger--1">
 					
@@ -35,9 +34,8 @@ class BoxChat extends React.Component {
 			</div>  
 			<div className="body__send">  
 				<input type="text" 
-				onChange={this.handleChange}
 				placeholder="Type a messeger. . ."
-				 className="input body__send--input "/>
+					className="input body__send--input "/>
 				<button>
 					<IconSend className="body__send--icon"/>
 				</button>  
