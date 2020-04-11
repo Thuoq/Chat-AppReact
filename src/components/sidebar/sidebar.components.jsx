@@ -9,6 +9,7 @@ import {selectSocket} from '../../redux/socket/socket.selector';
 import {createStructuredSelector} from 'reselect';
 import {selectUserCurrent} from '../../redux/userConnect/userConnect.selector';
 import {setUserConnect,logoutUser} from '../../redux/userConnect/userConnect.action';
+import {Link} from 'react-router-dom';
 import "./sidebar.styles.scss";  
 class SideBar extends React.Component {
 	state = {
@@ -65,12 +66,14 @@ class SideBar extends React.Component {
 			 
 				<div className="chat__active">
 					{ 
-
-						filterUserConnect.map((el,idx) => <UserChatBar 
-									key={idx} user={el} handleChooseUserChat={this.handleChooseUserChat}/> )
+						filterUserConnect.map((el,idx) =>
+						 <UserChatBar 
+							key={idx}
+							id= {idx}
+							user={el}
+							handleChooseUserChat={this.handleChooseUserChat}/>)
 					}
 				</div>
-		
 				<div className="chat__logout">
 					<IconLogout onClick={this.handleLogout} className="chat__logout--icon"/>
 				</div>

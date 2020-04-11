@@ -35,8 +35,15 @@
     			position: absolute;
     			left: 20%;  
 			}
-
+			& .hidden{
+				opacity: 0%;
+				width: 2.75rem;
+    			height: 2.75rem;
+    			position: absolute;
+    			left: 20%;
+			}
 		}
+		
 		.chat__group{
 			display: flex;
 			font-weight: bold;

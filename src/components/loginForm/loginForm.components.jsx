@@ -35,7 +35,7 @@ class LoginForm extends React.Component{
 	render() {
 		const {nickname} =this.state;
 		return (
-			<div className="header" >
+			<div className="header">
 				<form className= "header__form" onSubmit={this.handleSubmit}>
 					<input type="text" className="header__input"
 					 placeholder="Please Type Your Cool Name!"
