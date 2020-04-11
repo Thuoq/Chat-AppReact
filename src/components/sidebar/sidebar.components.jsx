@@ -62,7 +62,7 @@ class SideBar extends React.Component {
 					<button className="btn btn--group"><span>Create Your Community</span></button>
 					<IconPlus className="chat__group--icon"/>
 				</div>
-				<hr/> 
+			 
 				<div className="chat__active">
 					{ 
 
@@ -70,7 +70,7 @@ class SideBar extends React.Component {
 									key={idx} user={el} handleChooseUserChat={this.handleChooseUserChat}/> )
 					}
 				</div>
-				<hr/>
+		
 				<div className="chat__logout">
 					<IconLogout onClick={this.handleLogout} className="chat__logout--icon"/>
 				</div>

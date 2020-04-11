@@ -2,7 +2,6 @@ import React from 'react';
 import "./user-boxChat.styles.scss";
  
 const UserBoxChat = ({userChoose}) => {
-	console.log(userChoose)
 	return (
 	<div className="body__user">  
 				<span className="body__user--active"></span>    

@@ -1,3 +1,99 @@
+.side-bar{
+	flex: 20% 0 0;
+	height: 85vh;     
+	margin-right: 4rem;
+	display: flex;
+	flex-direction: column;
+	.header__logo{
+		flex: 10%;
+	}
+}
+
+.box__chat{
+		background-color: #6C7B95;  
+		padding: 0.5rem;
+		box-shadow: 0 3rem 2.5rem rgba(7,7,7,0.16);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		border-radius: 1rem;
+		flex: 90% 0 0;    
+		.chat__heading{
+			text-align: center;
+			flex: 10% 0 0 ;    
+		}  
+		.chat__search{            
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			flex: 10% 0 0 ;
+			&--icon{
+				width: 2.75rem;
+    			height: 2.75rem;
+    			position: absolute;
+    			left: 20%;  
+			}
+
+		}
+		.chat__group{
+			display: flex;
+			font-weight: bold;
+			justify-content: center;
+    		align-items: center;
+    		position: relative;
+    		transition: all 0.2s ease;
+    		flex: 10% 0 0 ;
+			&--icon{
+				height: 3rem;
+				width: 4rem;     
+				position: absolute;
+				right: 0;    
+			}
+			&:hover{
+				transform: translateY(-3px) scale(1.05);  
+
+			}
+			
+
+		}
+		.chat__active{
+			flex: 50% 0 0 ;    
+		    margin: 0 auto;
+		    width: 85%;
+		    display: flex;
+		    flex-direction: column;
+		    
+		    align-content: center;
+		    overflow-y: scroll;    
+		    &::-webkit-scrollbar {
+			  width: 30px;
+			  border-radius: 100px;    
+			}
+			&::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+										border-radius: 100px;};  
+			&::-webkit-scrollbar{width:1rem;background-color:#6C7B95;};                        
+			&::-webkit-scrollbar-thumb{background-color:#484d79; border-radius: 100px;};      
+		}
+		
+		.chat__logout{
+			flex: 10% 0 0 ;      
+			text-align: center;
+			&--icon{		
+				width: 5rem;
+				height: 5rem;
+				margin-top:1rem;
+				cursor: pointer;
+				display: inline-block;     
+				transition: all 0.2s;
+				&:hover{
+					transform:translateY(-2px) scale(1.05);        
+
+				}
+			}
+		}
+}
 .input{
 	outline: none;
 	border-radius: 100px;
@@ -16,6 +112,19 @@
 	text-align: center;
 	font-size: inherit;
 	font-weight: 700;
+	color: #000000;
+	opacity: 0.64;
+}
+
+.heading__primary{	
+	font-family: 'Shadows Into Light Two', cursive;
+	color : #8BBABB;
+	opacity: 76%;
+	font-size: 4.6rem;
+	font-weight: 400; 
+}
+.heading__secondary{
+	font-size: 3rem;
 	color: #000000;
 	opacity: 0.64;
 }
@@ -38,111 +147,4 @@
     &:hover{
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); 
     }
-}
-.heading__primary{	
-	font-family: 'Shadows Into Light Two', cursive;
-	color : #6C7B95;
-	opacity: 76%;
-	font-size: 4.6rem;
-	font-weight: 400; 
-}
-.heading__secondary{
-	font-size: 3rem;
-	color: #000000;
-	opacity: 0.64;
-}
-.side-bar{
-	flex: 20% 0 0;
-	height: 90vh;
-	margin-right: 4rem;
-	display: flex;
-	flex-direction: column;
-	.header__logo{
-		flex: 10%;
-	}
-}
-.box__chat{
-		background-color: #6C7B95;  
-		padding: 0.5rem;
-		box-shadow: 0 3rem 2.5rem rgba(7,7,7,0.16);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		height: 100%;
-		border-radius: 1rem;
-
-		.chat__heading{
-			text-align: center;
-			flex-grow: 0.2;
-			margin-bottom: 1rem;
-		}
-		.chat__search{
-			display: flex;
-			flex-grow: 0;
-			justify-content: center;
-			align-items: center;
-			position: relative;
-			&--icon{
-				width: 2.75rem;
-    			height: 2.75rem;  
-    			position: absolute;
-    			left: 20%;  
-			}
-			& .hidden{
-				display: none;
-			}
-
-		}
-		.chat__group{
-			flex-grow: 1;
-			display: flex;
-			font-weight: bold;
-			justify-content: center;
-    		align-items: center;
-    		position: relative;
-    		transition: all 0.2s ease;
-			&--icon{
-				height: 3rem;
-				width: 4rem;     
-				position: absolute;
-				right: 0;    
-			}
-			&:hover{
-				transform: translateY(-3px) scale(1.05);  
-			}
-		}
-		.chat__active{
-		    flex-grow: 4;
-		    flex-basis: 60%;   
-		    margin: 0 auto;
-		    width: 85%;
-		    display: flex;  
-		    flex-direction: column;
-		    justify-content: space-around;
-		    align-content: center;   
-		}
-		
-		.chat__logout{
-			flex-grow: 0.5;
-			text-align: center;
-			&--icon{		
-				width: 5rem;
-				height: 5rem;
-				margin-top:1rem;
-				cursor: pointer;
-				display: inline-block;     
-				transition: all 0.2s;
-				&:hover{
-					transform:translateY(-2px) scale(1.05);        
-
-				}
-			}
-		}
-		hr{
-			width: 95%;
-			height: 1px;
-			background-color: #707070;
-			border:none;
-
-		}
 }

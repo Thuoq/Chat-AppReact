@@ -1,0 +1,29 @@
+.body{
+	&__user{  
+		display: flex;
+		justify-content: center;
+		align-items: center;  
+		margin: 0 2rem;  
+		border-bottom: 1px solid #424874;           
+		&--photo{
+			border-radius: 50%;    	    
+			width: 5rem;
+			height: 5rem;                 
+		}  
+		&--active{
+			width: 1rem;
+		    height: 1rem;
+		    border-radius: 50%;
+		    background-color: #424874;
+		}  
+		&--name{
+			color: #fff;      
+			font-size: 2rem;
+			font-weight: 700;  
+			text-transform: uppercase;   
+		}
+		&> * {
+			margin-right: 1rem; 
+		}
+	}
+}
