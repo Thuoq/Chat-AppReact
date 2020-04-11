@@ -31,28 +31,9 @@
 	border-radius: 1.5rem;
 	&__messeger{
 		display: flex;
-		flex-direction: column-reverse; 
-              
+		flex-direction: column-reverse;       
 		padding: 0 2rem;           
-		&--1{
-			align-self: flex-end;      
-			display: flex;
-			flex-direction: column;      
-		}
-		&--2{
-			align-self: flex-start;      
-			display: flex;    
-			flex-direction: column;        
-		}  
-		&-content{
-			margin-bottom: 2rem;   
-			display: inline-block;
-			padding: 1.75rem 2rem;   
-			background-color: #464159;
-			color: #fff;
-			border-radius: 1rem; 
-			
-		}
+		
 	}
 	&__send{
 		display: flex;
@@ -89,4 +70,18 @@
 			}
 		}
 	}    
+}
+.messeger-middle {
+	border-radius: 1rem; 
+	padding:  1.75rem 2rem;
+	background-color:#464159;
+	color: white; 
+	margin-bottom: 1rem;  
+}
+.right{
+	align-self: flex-end;
+}
+.left{
+
+	align-self: flex-start;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {ReactComponent as IconSend} from '../../assets/003-send.svg';
 import "./box-chat.styles.scss";
-import {connect} from 'react-redux';
+import {connect} from 'react-redux'; 
 import {createStructuredSelector} from 'reselect';
 import EVENT_TYPES from '../../Event';
 import {selectSocket} from '../../redux/socket/socket.selector';
@@ -20,24 +20,25 @@ class BoxChat extends React.Component {
 			this.setState({userChoose:userChoose})
 		})
 		socket.on("SENT-DATA-MESSEGER",messeger => {
-			console.log(messeger)
+			const divNode = document.getElementById('box-messeger');
 			const node = document.createElement('div');
-			node.className = "body__messeger-content  body__messeger-content--1";
+			node.className = "messeger-middle left";
 			const textMesseger  = document.createTextNode(messeger);
 			node.appendChild(textMesseger);
-			document.getElementById('user-client').appendChild(node);
+			divNode.insertBefore(node,divNode.childNodes[0]);
 		})
 	}
 
 	handeSendMesseger = (e) => {
 		const {messeger,userChoose} = this.state;
-		const {socket,user} = this.props;
+		const {socket} = this.props;
 		const node = document.createElement('div');
+		const divNode = document.getElementById('box-messeger');
 		const textMesseger  = document.createTextNode(messeger);
-		node.className = "body__messeger-content  body__messeger-content--1";
+		node.className = "messeger-middle right";
 		node.appendChild(textMesseger);
 		document.getElementById("input-send").value="";
-		document.getElementById('user-host').appendChild(node);
+		divNode.insertBefore(node,divNode.childNodes[0]);
 		socket.emit(EVENT_TYPES.MESSAGE_SENT,
 			{messeger: messeger,userChoose:userChoose})  
 	}
@@ -50,13 +51,8 @@ class BoxChat extends React.Component {
 		return (  
 			<div className="body"> 
 			<UserBoxChat userChoose={userChoose}  />
-			<div className="body__messeger">
-				<div className="body__messeger--1" id="user-host">
-
-				</div>
-				<div className="body__messeger--2"id="user-client">
-
-				</div>
+			<div className="body__messeger" id="box-messeger">
+				
 			</div>  
 			<div className="body__send">  
 				<input type="text" 

@@ -5,11 +5,12 @@ import { ReactComponent as IconLogout} from  '../../assets/004-real-estate.svg';
 import UserChatBar from '../user-chatbar/user-chatbar.components';
 import EVENT_TYPES from '../../Event';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {selectSocket} from '../../redux/socket/socket.selector';
 import {createStructuredSelector} from 'reselect';
 import {selectUserCurrent} from '../../redux/userConnect/userConnect.selector';
 import {setUserConnect,logoutUser} from '../../redux/userConnect/userConnect.action';
-import {Link} from 'react-router-dom';
+
 import "./sidebar.styles.scss";  
 class SideBar extends React.Component {
 	state = {
@@ -25,8 +26,9 @@ class SideBar extends React.Component {
 		})
 	}
 	handleLogout = () => {
-		const {logoutUser,socket,user,logout} = this.props;
+		const {logoutUser,socket,user,logout,history} = this.props;
 		logout();
+		history.push("/")
 		socket.emit(EVENT_TYPES.LOG_OUT,user,logoutUser) 
 	}
 	handleSearchUserOnline = (e) => {
@@ -70,7 +72,7 @@ class SideBar extends React.Component {
 						 <UserChatBar 
 							key={idx}
 							id= {idx}
-							user={el}
+							user={el}  
 							handleChooseUserChat={this.handleChooseUserChat}/>)
 					}
 				</div>
@@ -90,4 +92,4 @@ const mapStateToProps = createStructuredSelector({
 	socket : selectSocket,
 	userCurrent : selectUserCurrent
 })
-export default connect(mapStateToProps,mapDispatchToProps)(SideBar);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(SideBar));
