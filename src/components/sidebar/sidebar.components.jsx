@@ -5,7 +5,7 @@ import { ReactComponent as IconLogout} from  '../../assets/004-real-estate.svg';
 import UserChatBar from '../user-chatbar/user-chatbar.components';
 import EVENT_TYPES from '../../Event';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';  
 import {selectSocket} from '../../redux/socket/socket.selector';
 import {createStructuredSelector} from 'reselect';
 import {selectUserCurrent} from '../../redux/userConnect/userConnect.selector';
@@ -14,13 +14,17 @@ import {setUserConnect,logoutUser} from '../../redux/userConnect/userConnect.act
 import "./sidebar.styles.scss";  
 class SideBar extends React.Component {
 	state = {
-		searchField: ''
+		searchField: '',
+		groups: []
 	}
 	componentDidMount() {
 		const {socket,setUserConnect,logoutUser} = this.props;
 		socket.on(EVENT_TYPES.USER__CURRENTLY_ONLINE,(currentUser)=> {
 			setUserConnect(currentUser)
 		})
+		socket.on("CREATE__GROUP",(arrayGroup) => {
+			this.setState({groups: arrayGroup });
+		}) 
 		socket.on("logout-user",(userName)=>{
 			logoutUser(userName);
 		})
@@ -35,14 +39,25 @@ class SideBar extends React.Component {
 		e.preventDefault();
 		this.setState({ searchField : e.target.value})
 	}
-	handleChooseUserChat = (user)  => {
-		const {socket} = this.props;
-		socket.emit(EVENT_TYPES.CHOOSE_USER_TO_CHAT,user);
+	handeleClickUserOrGroup = (groupOrUser) => {
+		const{socket} = this.props;
+		return  () => groupOrUser.includes("groups")
+			 ? socket.emit("join-room-chat",groupOrUser)
+			 : socket.emit(EVENT_TYPES.CHOOSE_USER_TO_CHAT,groupOrUser);
 	}
+	handeCreateGroup  = (e) => {
+		e.preventDefault();
+		const{socket} = this.props;
+		const nameGroup = prompt("What Is Your Community Name?");
+		socket.emit(EVENT_TYPES.COMMUNITY_CHAT,`${nameGroup} group`);
+		this.setState({groups:nameGroup})
+	}  
 	render() {
 		const {userCurrent} = this.props;
-		const {searchField} = this.state;
-		const filterUserConnect = userCurrent.filter( el => el.includes(searchField))
+		const {searchField,groups} = this.state;
+		const sumGroupwithUser = userCurrent.concat(groups)
+		const filterUserConnect = sumGroupwithUser.filter( el => el.includes(searchField));
+
 		return (
 			<div className="side-bar">
 			<div className="header__logo">
@@ -62,18 +77,31 @@ class SideBar extends React.Component {
 					placeholder="Search"/>
 				</div>
 				<div className="chat__group u-margin-bottom-small">
-					<button className="btn btn--group"><span>Create Your Community</span></button>
+					<button onClick={this.handeCreateGroup} className="btn btn--group"><span>Create Your Community</span></button>
 					<IconPlus className="chat__group--icon"/>
 				</div>
 			 
 				<div className="chat__active">
 					{ 
-						filterUserConnect.map((el,idx) =>
-						 <UserChatBar 
-							key={idx}
-							id= {idx}
-							user={el}  
-							handleChooseUserChat={this.handleChooseUserChat}/>)
+						filterUserConnect.map((el,idx) =>{
+							if(el.includes("group")) {
+								return (
+								  <UserChatBar 
+									key={idx}
+									id= {idx}
+									user={el}  
+									group = "group"
+									handeleClickUserOrGroup={this.handeleClickUserOrGroup}/>
+								)
+							}else{
+								return (
+								  <UserChatBar 
+										key={idx}
+										id= {idx}
+										user={el}  
+										handeleClickUserOrGroup={this.handeleClickUserOrGroup}/>)	
+							}
+						})
 					}
 				</div>
 				<div className="chat__logout">

@@ -7,12 +7,6 @@
 		background-color: white;
 		cursor: pointer;
 		margin-bottom: 2rem;
-	.user__photo{
-		width: 19%;
-    	height: 80%;
-		transform: translateX(1rem);
-		border-radius: 50%;
-	}
 	.user__name{
 		text-align: center;
 		flex-grow: 1;
@@ -27,5 +21,23 @@
 	    border-radius: 50%;
 	    background-color: #424874;
 	    margin-right: 1rem;
+	}
+}
+.group{
+	background-color: #464159;
+	display: flex;
+	align-items: center;
+	height: 6rem;
+	border-radius:1rem;
+	width: 100%;
+	cursor: pointer;
+	margin-bottom: 2rem;
+	.group__name{
+		text-align: center;
+		flex-grow: 1;
+		color: white;
+		opacity: 0.64;
+		font-size: 2rem;
+		font-weight: 700;
 	}
 }

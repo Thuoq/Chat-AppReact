@@ -1,5 +1,5 @@
 const EVENT_TYPES = require("../Event");
-const {createChat,createUser,createMessage} = require("../Factories");
+const {createUser} = require("../Factories");
 const io = require("./index").io;   
 let userConnected ={}
 /*userName: {id, name : userName} nest object*/
@@ -12,7 +12,7 @@ module.exports = (socket) => {
 		}else{
 			setUser({isUser:false,user: createUser({name:nickname,id: socket.id})})
 		}  
-	})     
+	})        
 	// ADD USER    
 	socket.on(EVENT_TYPES.USER__CONNECTED,(user)=>{
 		userConnected = addUser(userConnected,user);
@@ -21,7 +21,7 @@ module.exports = (socket) => {
 	})
 	socket.on(EVENT_TYPES.LOG_OUT, (userOut) => {
 		socket.broadcast.emit("logout-user",userOut.name);  
-		delete userConnected[userOut.name];  	
+		delete userConnected[userOut.name];  	  
 	})   
 	socket.on(EVENT_TYPES.CHOOSE_USER_TO_CHAT,(user) => {
 		socket.emit("Choose-user-date",user)
@@ -31,7 +31,17 @@ module.exports = (socket) => {
 			let socketId = userConnected[userChoose].id;
 			io.to(`${socketId}`).emit("SENT-DATA-MESSEGER",messeger)
 		}   
-	}) 
+	});
+	socket.on(EVENT_TYPES.COMMUNITY_CHAT,(nameGroup) => {
+		socket.join(nameGroup);
+		socket.groups = nameGroup;
+		 let storeGroups = [];
+		 storeGroups.push(nameGroup)
+		socket.emit("CREATE__GROUP",storeGroups)
+	})
+	socket.on("join-room-chat", (groupName) => {
+		socket.join(groupName);
+	})
 }  
 
 /*@param user: {id: , name:}*/
