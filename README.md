@@ -1,7 +1,12 @@
 HaNoi: 12/4/2020: 
-This is the first my production when I learned REACT-REDUX 3 months  basic NODEJS this name "CHAT APP":
+# Chat APP (1v1)
+This is the first my production when I learned REACT-REDUX 3 months  basic NODEJS this name "CHAT APP"(1v1):
 
-"Chat App" conenct by: REACT-REDUX + NODEJS(SOCKET.IO);
+Những feature bug là : user phải click người dùng thì mới hiện tin nhắn và chưa có để lưu messeger,Group Chat App;
 
+
+"Chat App" conenct by: REACT-REDUX + NODEJS(SOCKET.IO) + SASS;
+
+cách mở app : clone app => npm install => rồi chọn user rồi chat;
 
 
