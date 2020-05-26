@@ -7,6 +7,6 @@ Những feature bug là : user phải click người dùng thì mới hiện tin
 
 "Chat App" conenct by: REACT-REDUX + NODEJS(SOCKET.IO) + SASS;
 
-cách mở app : clone app => npm install => rồi chọn user rồi chat;
+cách mở app : clone app => npm install ( nếu bạn chưa tải nodemon thì tải nha )  => npm run start  => rồi chọn user rồi chat;
 
 
